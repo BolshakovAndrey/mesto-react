@@ -1,57 +1,17 @@
-import logo from './logo.svg';
+import React from 'react';
+import Header from './Header';
+import Main from './Main';
+import Footer from './Footer';
 
 function App() {
   return (
-      <body className="page">
-      <header className="header">
-        <a href="#">
-          <img alt="логотип сайта Место." className="header__logo" src="<%=require('./images/logo.svg')%>"/>
-        </a>
-      </header>
-      <div className="container">
-        <main className="content">
-          <section className="profile">
-            <div className="profile__avatar-container">
-              <img alt="Аватар профиля" src='#' className="profile__avatar" />
-              <button aria-label="Обновить аватар" className="profile__avatar-btn" type="button"></button>
-            </div>
-            <div className="profile__info">
-              <h1 className="profile__name"></h1>
-              <button className="profile__edit-btn page__button" title="Редактировать профиль" type="button"></button>
-              <p className="profile__about"></p>
-            </div>
-            <button className="profile__add-btn page__button" title="Добавить новую фотографию" type="button"></button>
-          </section>
-
-          {/*// Cards блок*/}
-          <section className="cards">
-            <ul className="cards__list"></ul>
-          </section>
-
-          {/*// Темплэйт*/}
-          <template id="card-template">
-            <li className="cards__item">
-              <figure className="card">
-                <button className="link card__delete-btn" type="button"></button>
-                <img alt="Изображение" src='#' className="card__image" />
-                <div className="card__wrapper">
-                  <h2 className="card__title"></h2>
-                  <div className="card__like-container">
-                    <button className="card__like"></button>
-                    <span className="card__like-counter"></span>
-                  </div>
-                </div>
-              </figure>
-            </li>
-          </template>
-
-        </main>
-        <footer className="footer">
-          <p className="footer__copyright">&copy;2021 Mesto Russia</p>
-        </footer>
+      <div className="page">
+      <>
+        <Header />
+        <Main />
+        <Footer />
 
         {/*// popup редактирования профиля*/}
-
         <article className="popup popup_type_profile">
           <div className="popup__container">
             <h2 className="popup__title">Редактировать профиль</h2>
@@ -130,8 +90,8 @@ function App() {
             <button aria-label="Закрыть окно" className="popup__btn-close page__button" type="button"></button>
           </div>
         </article>
+      </>
       </div>
-      </body>
   );
 }
 

@@ -3,18 +3,8 @@ import React from 'react'
 
 function Main(props) {
 
-    function handleEditAvatarClick() {
-        document.querySelector('.popup_type_avatar').classList.add("popup_opened");
-    }
-    function handleEditProfileClick() {
-        document.querySelector(".popup_type_profile").classList.add("popup_opened");
-    }
-    function handleAddPlaceClick() {
-        document.querySelector(".popup_type_add").classList.add("popup_opened");
-    }
-
     return (
-        // <div className="container">
+        <div className="container">
             <main className="content">
                 <section className="profile">
                     <div className="profile__avatar-container">
@@ -22,7 +12,7 @@ function Main(props) {
                         <button aria-label="Обновить аватар"
                                 className="profile__avatar-btn"
                                 type="button"
-                                onClick={handleEditAvatarClick}
+                                onClick={props.onEditAvatar}
                         ></button>
                     </div>
                     <div className="profile__info">
@@ -30,14 +20,14 @@ function Main(props) {
                         <button className="profile__edit-btn page__button"
                                 title="Редактировать профиль"
                                 type="button"
-                                onClick={handleEditProfileClick}
+                                onClick={props.onEditProfile}
                         ></button>
                         <p className="profile__about"></p>
-                    </div>
+                    </div   >
                     <button className="profile__add-btn page__button"
                             title="Добавить новую фотографию"
                             type="button"
-                            onClick={handleAddPlaceClick}
+                            onClick={props.onAddPlace}
                     ></button>
                 </section>
 
@@ -64,7 +54,7 @@ function Main(props) {
                 </template>
 
             </main>
-        // </div>
+        </div>
     );
 }
 

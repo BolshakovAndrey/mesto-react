@@ -6,7 +6,6 @@ import Footer from './Footer';
 function App() {
   return (
       <div className="page">
-      <>
         <Header />
         <Main />
         <Footer />
@@ -90,7 +89,6 @@ function App() {
             <button aria-label="Закрыть окно" className="popup__btn-close page__button" type="button"></button>
           </div>
         </article>
-      </>
       </div>
   );
 }

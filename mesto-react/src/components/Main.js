@@ -1,21 +1,44 @@
 import React from 'react'
 
 
-function Main() {
+function Main(props) {
+
+    function handleEditAvatarClick() {
+        document.querySelector('.popup_type_avatar').classList.add("popup_opened");
+    }
+    function handleEditProfileClick() {
+        document.querySelector(".popup_type_profile").classList.add("popup_opened");
+    }
+    function handleAddPlaceClick() {
+        document.querySelector(".popup_type_add").classList.add("popup_opened");
+    }
+
     return (
         // <div className="container">
             <main className="content">
                 <section className="profile">
                     <div className="profile__avatar-container">
                         <img alt="Аватар профиля" src='#' className="profile__avatar" />
-                        <button aria-label="Обновить аватар" className="profile__avatar-btn" type="button"></button>
+                        <button aria-label="Обновить аватар"
+                                className="profile__avatar-btn"
+                                type="button"
+                                onClick={handleEditAvatarClick}
+                        ></button>
                     </div>
                     <div className="profile__info">
                         <h1 className="profile__name"></h1>
-                        <button className="profile__edit-btn page__button" title="Редактировать профиль" type="button"></button>
+                        <button className="profile__edit-btn page__button"
+                                title="Редактировать профиль"
+                                type="button"
+                                onClick={handleEditProfileClick}
+                        ></button>
                         <p className="profile__about"></p>
                     </div>
-                    <button className="profile__add-btn page__button" title="Добавить новую фотографию" type="button"></button>
+                    <button className="profile__add-btn page__button"
+                            title="Добавить новую фотографию"
+                            type="button"
+                            onClick={handleAddPlaceClick}
+                    ></button>
                 </section>
 
                 {/*// Cards блок*/}

@@ -1,14 +1,30 @@
 import React from 'react'
+import api from "../utils/api";
 
 
 function Main(props) {
+    const [userName, setuserName] = React.useState('');
+    const [userDescription, setuserDescription] = React.useState('');
+    const [userAvatar, setuserAvatar] = React.useState('');
+
+    React.useEffect(() => {
+        api.getUserInfo()
+            .then((res) => {
+                setuserName(res.name);
+                setuserDescription(res.about);
+                setuserAvatar(res.avatar);
+            })
+            .catch((err) => {
+                console.log('Error: ' + err);
+            })
+    })
 
     return (
         <div className="container">
             <main className="content">
                 <section className="profile">
                     <div className="profile__avatar-container">
-                        <img alt="Аватар профиля" src='#' className="profile__avatar" />
+                        <img alt="Аватар профиля" src={userAvatar} className="profile__avatar" />
                         <button aria-label="Обновить аватар"
                                 className="profile__avatar-btn"
                                 type="button"
@@ -16,13 +32,13 @@ function Main(props) {
                         ></button>
                     </div>
                     <div className="profile__info">
-                        <h1 className="profile__name"></h1>
+                        <h1 className="profile__name">{userName}</h1>
                         <button className="profile__edit-btn page__button"
                                 title="Редактировать профиль"
                                 type="button"
                                 onClick={props.onEditProfile}
                         ></button>
-                        <p className="profile__about"></p>
+                        <p className="profile__about">{userDescription}</p>
                     </div   >
                     <button className="profile__add-btn page__button"
                             title="Добавить новую фотографию"

@@ -6,7 +6,7 @@ function Card(props) {
         props.onClick(props.card);
     }
 
-    return(
+    return (
         <li className="cards__item">
             <figure className="card">
                 <button className="link card__delete-btn"

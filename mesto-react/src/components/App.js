@@ -51,13 +51,13 @@ function App() {
                 buttonText='Сохранить'
                 isOpen={isEditProfilePopupOpen}
                 onClose={closeAllPopups}
-                >
-                    <input className="popup__input" id='popup-name' maxLength="40" minLength="2"
-                           name="name" type="text" placeholder='Имя' required />
-                    <p className="popup__input-error" id="popup-name-error"/>
-                    <input className="popup__input" id='popup-about' maxLength="200" minLength="2"
-                           name="about" type="text" placeholder='Описание' required />
-                    <p className="popup__input-error" id="popup-about-error"/>
+            >
+                <input className="popup__input" id='popup-name' maxLength="40" minLength="2"
+                       name="name" type="text" placeholder='Имя' required/>
+                <p className="popup__input-error" id="popup-name-error"/>
+                <input className="popup__input" id='popup-about' maxLength="200" minLength="2"
+                       name="about" type="text" placeholder='Описание' required/>
+                <p className="popup__input-error" id="popup-about-error"/>
             </PopupWithForm>
             <PopupWithForm
                 name='add'
@@ -65,13 +65,13 @@ function App() {
                 buttonText='Создать'
                 isOpen={isAddPlacePopupOpen}
                 onClose={closeAllPopups}
-                >
-                    <input className="popup__input" id='popup-add-name' maxLength="40" minLength="2"
-                           name="name" placeholder="Название" required type="text"/>
-                    <p className="popup__input-error" id="popup-add-name-error"/>
-                    <input className="popup__input" id='link' maxLength="200" minLength="2"
-                           name="link" placeholder="Ссылка на картинку" required type="url"/>
-                    <p className="popup__input-error" id="link-error"/>
+            >
+                <input className="popup__input" id='popup-add-name' maxLength="40" minLength="2"
+                       name="name" placeholder="Название" required type="text"/>
+                <p className="popup__input-error" id="popup-add-name-error"/>
+                <input className="popup__input" id='link' maxLength="200" minLength="2"
+                       name="link" placeholder="Ссылка на картинку" required type="url"/>
+                <p className="popup__input-error" id="link-error"/>
             </PopupWithForm>
             <PopupWithForm
                 name="avatar"
@@ -79,12 +79,12 @@ function App() {
                 buttonText='Сохранить'
                 isOpen={isEditAvatarPopupOpen}
                 onClose={closeAllPopups}
-                >
-                    <input className="popup__input" id="avatar-link" name="avatarLink"
-                           placeholder="Ссылка на картинку"
-                           required
-                           type="url"/>
-                    <p className='popup__input-error' id='avatar-link-error'/>
+            >
+                <input className="popup__input" id="avatar-link" name="avatarLink"
+                       placeholder="Ссылка на картинку"
+                       required
+                       type="url"/>
+                <p className='popup__input-error' id='avatar-link-error'/>
             </PopupWithForm>
             <PopupWithForm
                 name="confirm"
@@ -92,10 +92,10 @@ function App() {
                 buttonText="Да"
             />
             {selectedCard &&
-                <ImagePopup
-                    card={selectedCard}
-                    onClose={closeAllPopups}
-                />
+            <ImagePopup
+                card={selectedCard}
+                onClose={closeAllPopups}
+            />
             }
         </div>
     );

@@ -33,7 +33,7 @@ function Main(props) {
             <main className="content">
                 <section className="profile">
                     <div className="profile__avatar-container">
-                        <img alt="Аватар профиля" src={userAvatar} className="profile__avatar" />
+                        <img alt="Аватар профиля" src={userAvatar} className="profile__avatar"/>
                         <button aria-label="Обновить аватар"
                                 className="profile__avatar-btn"
                                 type="button"
@@ -48,7 +48,7 @@ function Main(props) {
                                 type="button"
                                 onClick={props.onEditProfile}
                         ></button>
-                    </div   >
+                    </div>
                     <button className="profile__add-btn page__button"
                             title="Добавить новую фотографию"
                             type="button"
@@ -57,9 +57,9 @@ function Main(props) {
                 </section>
                 <section className="cards">
                     <ul className="cards__list">
-                    {cards.map((card) => (
-                        <Card key={card._id} onClick={props.onCardClick} card={card} />
-                    ))}
+                        {cards.map((card) => (
+                            <Card key={card._id} onClick={props.onCardClick} card={card}/>
+                        ))}
                     </ul>
                 </section>
             </main>

@@ -4,8 +4,12 @@ function PopupWithForm(props) {
     return(
         <div className={`popup popup_type_${props.name} ${props.isOpen && 'popup_opened'}`}>
             <div className="popup__container">
-                <button onClick={props.onClose} className="popup__btn-close" type="button" aria-label="Закрыть окно"></button>
-                <form onSubmit={props.onSubmit} className="popup__form" name={'${props.name}__form'} noValidate>
+                <button onClick={props.onClose}
+                        className="popup__btn-close"
+                        type="button"
+                        aria-label="Закрыть окно">
+                </button>
+                <form className="popup__form" name={`${props.name}__form`} noValidate>
                     <h2 className="popup__title">{props.title}</h2>
                     <fieldset className="popup__input">
                         {props.children}

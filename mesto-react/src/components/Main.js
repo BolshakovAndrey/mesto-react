@@ -1,21 +1,30 @@
 import React from 'react'
 import api from "../utils/api";
-
+import Card from "./Card";
 
 function Main(props) {
-    const [userName, setuserName] = React.useState('');
-    const [userDescription, setuserDescription] = React.useState('');
-    const [userAvatar, setuserAvatar] = React.useState('');
+    const [userName, setUserName] = React.useState('');
+    const [userDescription, setUserDescription] = React.useState('');
+    const [userAvatar, setUserAvatar] = React.useState('');
+    const [cards, setCards] = React.useState([]);
 
     React.useEffect(() => {
         api.getUserInfo()
             .then((res) => {
-                setuserName(res.name);
-                setuserDescription(res.about);
-                setuserAvatar(res.avatar);
+                setUserName(res.name);
+                setUserDescription(res.about);
+                setUserAvatar(res.avatar);
             })
             .catch((err) => {
                 console.log('Error: ' + err);
+            })
+    })
+
+    React.useEffect(() => {
+        api.getInitialCards()
+            .then((res) => setCards(res))
+            .catch((err) => {
+                console.log(`Error: ${err}`);
             })
     })
 
@@ -33,12 +42,12 @@ function Main(props) {
                     </div>
                     <div className="profile__info">
                         <h1 className="profile__name">{userName}</h1>
+                        <p className="profile__about">{userDescription}</p>
                         <button className="profile__edit-btn page__button"
                                 title="Редактировать профиль"
                                 type="button"
                                 onClick={props.onEditProfile}
                         ></button>
-                        <p className="profile__about">{userDescription}</p>
                     </div   >
                     <button className="profile__add-btn page__button"
                             title="Добавить новую фотографию"
@@ -46,29 +55,13 @@ function Main(props) {
                             onClick={props.onAddPlace}
                     ></button>
                 </section>
-
-                {/*// Cards блок*/}
                 <section className="cards">
-                    <ul className="cards__list"></ul>
+                    <ul className="cards__list">
+                    {cards.map((card) => (
+                        <Card key={card._id} onClick={props.onCardClick} card={card} />
+                    ))}
+                    </ul>
                 </section>
-
-                {/*// Темплэйт*/}
-                <template id="card-template">
-                    <li className="cards__item">
-                        <figure className="card">
-                            <button className="link card__delete-btn" type="button"></button>
-                            <img alt="Изображение" src='#' className="card__image" />
-                            <div className="card__wrapper">
-                                <h2 className="card__title"></h2>
-                                <div className="card__like-container">
-                                    <button className="card__like"></button>
-                                    <span className="card__like-counter"></span>
-                                </div>
-                            </div>
-                        </figure>
-                    </li>
-                </template>
-
             </main>
         </div>
     );

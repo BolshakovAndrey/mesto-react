@@ -1,14 +1,14 @@
-import React from 'react'
+import {useState, useEffect} from 'react'
 import api from "../utils/api";
 import Card from "./Card";
 
 function Main(props) {
-    const [userName, setUserName] = React.useState('');
-    const [userDescription, setUserDescription] = React.useState('');
-    const [userAvatar, setUserAvatar] = React.useState('');
-    const [cards, setCards] = React.useState([]);
+    const [userName, setUserName] = useState('');
+    const [userDescription, setUserDescription] = useState('');
+    const [userAvatar, setUserAvatar] = useState('');
+    const [cards, setCards] = useState([]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         api.getUserInfo()
             .then((res) => {
                 setUserName(res.name);
@@ -18,18 +18,16 @@ function Main(props) {
             .catch((err) => {
                 console.log('Error: ' + err);
             })
-    })
 
-    React.useEffect(() => {
         api.getInitialCards()
             .then((res) => setCards(res))
             .catch((err) => {
                 console.log(`Error: ${err}`);
             })
-    })
+    }, [])
 
     return (
-        <div className="container">
+        // <div className="container">
             <main className="content">
                 <section className="profile">
                     <div className="profile__avatar-container">
@@ -63,7 +61,7 @@ function Main(props) {
                     </ul>
                 </section>
             </main>
-        </div>
+        // </div>
     );
 }
 

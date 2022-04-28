@@ -20,13 +20,9 @@ function Card({ card, onClick, onCardLike }) {
     // Создаём переменную, которую после зададим в `className` для кнопки лайка
     const cardLikeButtonClassName = `card__like ${isLiked ? 'card__like_active' : ''}`;
 
-    function handleClick() {
-        onClick(card);
-    }
+    function handleClick() {onClick(card);}
 
-    function handleLikedClick() {
-        onCardLike(card)
-    }
+    function handleLikeClick() {onCardLike(card)}
 
     return (
         <li className="cards__item">
@@ -41,7 +37,7 @@ function Card({ card, onClick, onCardLike }) {
                         <button className={cardLikeButtonClassName}
                                 aria-label="Поставить лайк"
                                 type="button"
-                                onClick={handleLikedClick}
+                                onClick={handleLikeClick}
                         >
                         </button>
                         <span className="card__like-counter">{card.likes.length}</span>

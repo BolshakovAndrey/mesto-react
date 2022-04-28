@@ -9,7 +9,11 @@ function PopupWithForm(props) {
                         type="button"
                         aria-label="Закрыть окно">
                 </button>
-                <form className="popup__form" name={`${props.name}__form`} noValidate>
+                <form className="popup__form"
+                      name={`${props.name}__form`}
+                      noValidate
+                      onSubmit={props.onSubmit}
+                >
                     <h2 className="popup__title">{props.title}</h2>
                     <fieldset className="popup__input">
                         {props.children}

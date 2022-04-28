@@ -5,21 +5,25 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
+import EditProfilePopup from './EditProfilePopup';
 import {CurrentUserContext,} from '../contexts/CurrentUserContext';
 import api from "../utils/api";
 
 
 function App() {
+    //Стейты для popup (Принимает состояние - открыт-true/не открыт-false
     const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
     const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
     const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
+
+    //Стейт для выбранного фото
     const [selectedCard, setSelectedCard] = useState(null);
 
     // Стейт, отвечающий за данные текущего пользователя
     const [currentUser, setCurrentUser] = React.useState({
         name: 'TestUser',
         about: 'Test',
-        avatar: '',
+        avatar: 'Test avatar',
     });
 
     useEffect(() => {
@@ -32,8 +36,19 @@ function App() {
             })
     }, [])
 
-    function handleSetCurrentUser() {
-        setCurrentUser()
+    //  Обработчик для отправки данных пользователя на сервер
+    // (редактирование данных профиля)
+    function handleUpdateUser(data) {
+        api.setUserInfo(data)
+            .then(res => {
+                setCurrentUser(res);
+            })
+            .then(() => {
+                setEditProfilePopupOpen(false);
+            })
+            .catch((err) => {
+                console.log(`Error: ${err}`);
+            })
     }
 
     function handleCardClick(card) {
@@ -71,20 +86,12 @@ function App() {
                         onCardClick={handleCardClick}
                     />
                     <Footer/>
-                    <PopupWithForm
-                        name='edit'
-                        title='Редактировать профиль'
-                        buttonText='Сохранить'
+                    <EditProfilePopup
                         isOpen={isEditProfilePopupOpen}
+                        buttonText='Сохранить'
                         onClose={closeAllPopups}
-                    >
-                        <input className="popup__input" id='popup-name' maxLength="40" minLength="2"
-                               name="name" type="text" placeholder='Имя' required/>
-                        <p className="popup__input-error" id="popup-name-error"/>
-                        <input className="popup__input" id='popup-about' maxLength="200" minLength="2"
-                               name="about" type="text" placeholder='Описание' required/>
-                        <p className="popup__input-error" id="popup-about-error"/>
-                    </PopupWithForm>
+                        onUpdateUser={handleUpdateUser}
+                    />
                     <PopupWithForm
                         name='add'
                         title="Новое место"

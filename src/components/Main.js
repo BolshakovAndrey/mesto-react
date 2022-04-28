@@ -1,24 +1,16 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useContext} from 'react'
 import api from "../utils/api";
 import Card from "./Card";
+import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
 function Main(props) {
-    const [userName, setUserName] = useState('');
-    const [userDescription, setUserDescription] = useState('');
-    const [userAvatar, setUserAvatar] = useState('');
+
     const [cards, setCards] = useState([]);
 
-    useEffect(() => {
-        api.getUserInfo()
-            .then((res) => {
-                setUserName(res.name);
-                setUserDescription(res.about);
-                setUserAvatar(res.avatar);
-            })
-            .catch((err) => {
-                console.log('Error: ' + err);
-            })
+    //Подписка на контекст CurrentUserContext
+    const currentUser = useContext(CurrentUserContext);
 
+    useEffect(() => {
         api.getInitialCards()
             .then((res) => setCards(res))
             .catch((err) => {
@@ -31,7 +23,7 @@ function Main(props) {
             <main className="content">
                 <section className="profile">
                     <div className="profile__avatar-container">
-                        <img alt="Аватар профиля" src={userAvatar} className="profile__avatar"/>
+                        <img alt="Аватар профиля" src={`${currentUser.avatar}`} className="profile__avatar"/>
                         <button aria-label="Обновить аватар"
                                 className="profile__avatar-btn"
                                 type="button"
@@ -39,8 +31,8 @@ function Main(props) {
                         ></button>
                     </div>
                     <div className="profile__info">
-                        <h1 className="profile__name">{userName}</h1>
-                        <p className="profile__about">{userDescription}</p>
+                        <h1 className="profile__name">{currentUser.name}</h1>
+                        <p className="profile__about">{currentUser.about}</p>
                         <button className="profile__edit-btn page__button"
                                 title="Редактировать профиль"
                                 type="button"

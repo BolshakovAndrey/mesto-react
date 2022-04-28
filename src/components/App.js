@@ -6,6 +6,7 @@ import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 import {CurrentUserContext,} from '../contexts/CurrentUserContext';
 import api from "../utils/api";
 
@@ -32,7 +33,7 @@ function App() {
                 setCurrentUser(res);
             })
             .catch((err) => {
-                console.log(`Error: ${err}`);
+                console.log(`Ошибка обновления информации о пользователе: ${err}`);
             })
     }, [])
 
@@ -47,10 +48,24 @@ function App() {
                 setEditProfilePopupOpen(false);
             })
             .catch((err) => {
-                console.log(`Error: ${err}`);
+                console.log(`Ошибка обновления информации о пользователе: ${err}`);
             })
     }
 
+    function handleUpdateAvatar(data){
+        api.updateUserAvatar(data)
+            .then(res => {
+                setCurrentUser(res);
+            })
+            .then(() => {
+                setEditAvatarPopupOpen(false);
+            })
+            .catch((err) => {
+                console.log(`Ошибка обновления аватара пользователя: ${err}`);
+            })
+    }
+
+    // Обработчик клика по изображению для открытия popup картинки
     function handleCardClick(card) {
         setSelectedCard(card);
     }
@@ -92,6 +107,12 @@ function App() {
                         onClose={closeAllPopups}
                         onUpdateUser={handleUpdateUser}
                     />
+                    <EditAvatarPopup
+                        isOpen={isEditAvatarPopupOpen}
+                        onClose={closeAllPopups}
+                        buttonText='Сохранить'
+                        onUpdateAvatar={handleUpdateAvatar}
+                    />
                     <PopupWithForm
                         name='add'
                         title="Новое место"
@@ -106,19 +127,7 @@ function App() {
                                name="link" placeholder="Ссылка на картинку" required type="url"/>
                         <p className="popup__input-error" id="link-error"/>
                     </PopupWithForm>
-                    <PopupWithForm
-                        name="avatar"
-                        title="Обновить аватар"
-                        buttonText='Сохранить'
-                        isOpen={isEditAvatarPopupOpen}
-                        onClose={closeAllPopups}
-                    >
-                        <input className="popup__input" id="avatar-link" name="avatarLink"
-                               placeholder="Ссылка на картинку"
-                               required
-                               type="url"/>
-                        <p className='popup__input-error' id='avatar-link-error'/>
-                    </PopupWithForm>
+
                     <PopupWithForm
                         name="confirm"
                         title="Вы уверены?"

@@ -85,13 +85,13 @@ class Api {
             .then(this._checkResponseData)
     }
 
-    //  Радактирование  аватара пользователя
+    //  Рад актирование  аватара пользователя
     updateUserAvatar(data) {
         return fetch (`${this._baseUrl}/users/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-                avatar: data.avatarLink
+                avatar: data.avatar
             })
         })
             .then(this._checkResponseData);

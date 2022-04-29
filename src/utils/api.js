@@ -68,14 +68,12 @@ class Api {
     }
 
     changeLikeCardStatus(cardId, isLiked) {
-        return fetch(`${this._url}/cards/likes/${cardId}`,
-            {
-                method: isLiked ? "PUT" : "DELETE",
-                headers: this._headers
-            })
-            .then(res => this._checkResponseData(res))
+        if (isLiked) {
+            return this.likeCard(cardId);
+        } else {
+            return this.dislikeCard(cardId);
+        }
     }
-
 
     //   Установка лайка
     likeCard(id) {

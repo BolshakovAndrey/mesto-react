@@ -67,6 +67,14 @@ class Api {
             .then(this._checkResponseData);
     }
 
+    changeLikeCardStatus(cardId, isLiked) {
+        if (isLiked) {
+            return this.likeCard(cardId);
+        } else {
+            return this.dislikeCard(cardId);
+        }
+    }
+
     //   Установка лайка
     likeCard(id) {
         return fetch(`${this._baseUrl}/cards/${id}/likes`, {
@@ -97,7 +105,12 @@ class Api {
             .then(this._checkResponseData);
     }
 
+
+
+
 }
+
+
 
 const api = new Api({
     baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-38',

@@ -45,7 +45,8 @@ function Card({ card, onClick, onCardLike, onCardDelete }) {
                         <span className="card__like-counter">{card.likes.length}</span>
                     </div>
                 </div>
-                <button className={handleDeleteClick}
+                <button onClick={handleDeleteClick}
+                        className={cardDeleteButtonClassName}
                         type="button"
                         aria-label="Удалить фотографию">
                 </button>

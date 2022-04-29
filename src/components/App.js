@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import './../index.css'
 import Header from './Header';
 import Main from './Main';
@@ -34,6 +34,7 @@ function App() {
         avatar: 'Test avatar',
     });
 
+    // Функция первоначальной загрузки пользователя и фотографий
     useEffect(() => {
         setIsLoading(true);
 
@@ -48,27 +49,10 @@ function App() {
             .finally(() => {
                 setIsLoading(false);
             });
-    },[])
+    }, [])
 
-    // useEffect(() => {
-    //     api.getInitialCards()
-    //         .then((res) => setCards(res))
-    //         .catch((err) => {
-    //             console.log(`Error: ${err}`);
-    //         })
-    // })
-    //
-    // useEffect(() => {
-    //     api.getUserInfo()
-    //         .then((res) => {
-    //             setCurrentUser(res);
-    //         })
-    //         .catch((err) => {
-    //             console.log(`Ошибка обновления информации о пользователе: ${err}`);
-    //         })
-    // }, [])
 
-    //  Обработчик для отправки данных пользователя на сервер
+    //  Функция для отправки данных пользователя на сервер
     // (редактирование данных профиля)
     function handleUpdateUser(data) {
         api.setUserInfo(data)
@@ -83,6 +67,7 @@ function App() {
             })
     }
 
+    // Функция добавления новой фотографии
     function handleAddPlace(data) {
         api.addUserCard(data)
             .then((newCard) => {
@@ -96,6 +81,7 @@ function App() {
             })
     }
 
+    // Функция обновления аватара пользователя
     function handleUpdateAvatar(data) {
         api.updateUserAvatar(data)
             .then(res => {
@@ -109,6 +95,7 @@ function App() {
             })
     }
 
+    // Функция установки лайков
     function handleCardLike(card) {
         // Снова проверяем, есть ли уже лайк на этой карточке
         const isLiked = card.likes.some(i => i._id === currentUser._id);
@@ -142,18 +129,22 @@ function App() {
         setSelectedCard(card);
     }
 
+    // Обработчик кнопки редактирования информации профиля
     function handleEditProfilePopupOpen() {
         setEditProfilePopupOpen(!isEditProfilePopupOpen);
     }
 
+    // Обработчик кнопки кнопки добавления карточки
     function handleAddPlacePopupOpen() {
         setAddPlacePopupOpen(!isAddPlacePopupOpen);
     }
 
+    //  Обработчик кнопки редактирования аватарки
     function handleEditAvatarPopupOpen() {
         setEditAvatarPopupOpen(!isEditAvatarPopupOpen);
     }
 
+    //Обработчик закрытия popup
     function closeAllPopups() {
         setEditProfilePopupOpen(false);
         setAddPlacePopupOpen(false);
@@ -166,6 +157,7 @@ function App() {
             <div className="page">
                 <div className="container">
                     <Header/>
+
                     <Main
                         cards={cards}
                         onEditProfile={handleEditProfilePopupOpen}
@@ -176,31 +168,37 @@ function App() {
                         onCardDelete={handleCardDelete}
                         isLoading={isLoading}
                     />
+
                     <Footer/>
+
                     <EditProfilePopup
                         isOpen={isEditProfilePopupOpen}
                         buttonText='Сохранить'
                         onClose={closeAllPopups}
                         onUpdateUser={handleUpdateUser}
                     />
+
                     <EditAvatarPopup
                         isOpen={isEditAvatarPopupOpen}
                         onClose={closeAllPopups}
                         buttonText='Сохранить'
                         onUpdateAvatar={handleUpdateAvatar}
                     />
+
                     <AddPlacesPopup
                         onClose={closeAllPopups}
                         buttonText='Сохранить'
                         isOpen={isAddPlacePopupOpen}
                         onAddPlace={handleAddPlace}
                     />
+
                     <PopupWithForm
                         onClose={closeAllPopups}
                         name="confirm"
                         title="Вы уверены?"
                         buttonText="Да"
                     />
+
                     <ImagePopup
                         card={selectedCard}
                         onClose={closeAllPopups}

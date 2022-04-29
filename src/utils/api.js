@@ -95,7 +95,7 @@ class Api {
 
     //  Рад актирование  аватара пользователя
     updateUserAvatar(data) {
-        return fetch (`${this._baseUrl}/users/me/avatar`, {
+        return fetch(`${this._baseUrl}/users/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
@@ -106,10 +106,7 @@ class Api {
     }
 
 
-
-
 }
-
 
 
 const api = new Api({

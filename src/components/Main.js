@@ -43,7 +43,7 @@ function Main(props) {
             </section>
             <section className="cards">
                 {props.isLoading
-                    ? <Loader />
+                    ? <Loader/>
                     : <ul className="cards__list">
                         {props.cards.map((card) => (
                             <Card
@@ -55,7 +55,7 @@ function Main(props) {
                             />
                         ))}
                     </ul>
-                    }
+                }
             </section>
         </main>
         // </div>

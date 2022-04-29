@@ -19,7 +19,7 @@ function EditAvatarPopup(props) {
 
     // Очистка поля для ввода url аватара после закрытия popup
     useEffect(() => {
-        avatarRef.current.value='';
+        avatarRef.current.value = '';
     }, [props.isOpen])
 
     //Обработчик сабмита формы (обновление аватарки)
@@ -31,25 +31,25 @@ function EditAvatarPopup(props) {
     }
 
     return (
-    <PopupWithForm
-        name="avatar"
-        title="Обновить аватар"
-        buttonText='Сохранить'
-        isOpen={props.isOpen}
-        onClose={props.onClose}
-        onSubmit={handleSubmit}
-    >
-        <input
-            className="popup__input"
-            id="avatar-link"
-            name="avatarLink"
-            placeholder="Ссылка на картинку"
-            required
-            type="url"
-            ref={avatarRef}
-        />
-        <p className='popup__input-error' id='avatar-link-error'/>
-    </PopupWithForm>
+        <PopupWithForm
+            name="avatar"
+            title="Обновить аватар"
+            buttonText='Сохранить'
+            isOpen={props.isOpen}
+            onClose={props.onClose}
+            onSubmit={handleSubmit}
+        >
+            <input
+                className="popup__input"
+                id="avatar-link"
+                name="avatarLink"
+                placeholder="Ссылка на картинку"
+                required
+                type="url"
+                ref={avatarRef}
+            />
+            <p className='popup__input-error' id='avatar-link-error'/>
+        </PopupWithForm>
     )
 }
 
